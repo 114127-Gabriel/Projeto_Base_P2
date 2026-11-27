@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel de Gestão | Atividades Formativas</title>
+
+    <!-- Bootstrap local -->
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- MENU SUPERIOR -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+
+                <a class="navbar-brand fw-bold" href="#inicio">
+                    Atividades Formativas
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal"
+                    aria-expanded="false"
+                    aria-label="Abrir menu">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="menuPrincipal" class="collapse navbar-collapse">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="#inicio">Início</a>
+                        <a class="nav-link" href="#conteudo">Gestão</a>
+                        <a class="nav-link" href="#interacao">Nova atividade</a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- APRESENTAÇÃO -->
+        <section id="inicio" class="py-5">
+            <div class="container text-center">
+                <h1 class="display-5 fw-bold">
+                    Painel de Gestão
+                </h1>
+
+                <p class="lead text-secondary">
+                    Gerencie cursos e workshops disponíveis na plataforma.
+                </p>
+            </div>
+        </section>
+
+        <!-- MENSAGENS E CARREGAMENTO -->
+        <section class="container">
+
+            <div
+                id="mensagem"
+                class="alert d-none"
+                role="alert"
+                aria-live="polite">
+            </div>
+
+            <div
+                id="carregando"
+                class="alert alert-info d-none"
+                role="status">
+                Carregando atividades...
+            </div>
+
+        </section>
+
+        <!-- LISTAGEM DE ATIVIDADES -->
+        <section id="conteudo" class="container py-4">
+
+            <div class="section-heading mb-4">
+                <h2>Atividades cadastradas</h2>
+
+                <p class="text-secondary">
+                    Consulte, edite ou exclua as atividades disponíveis.
+                </p>
+            </div>
+
+            <!-- Os cards serão criados pelo JavaScript -->
+            <div
+                id="areaConteudo"
+                class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            </div>
+
+        </section>
+
+        <!-- FORMULÁRIO -->
+        <section id="interacao" class="container py-5">
+
+            <div class="section-heading mb-4">
+                <h2 id="tituloFormulario">Nova atividade</h2>
+
+                <p class="text-secondary">
+                    Preencha os campos abaixo para cadastrar um curso ou workshop.
+                </p>
+            </div>
+
+            <div class="formulario-container">
+
+                <form id="formAtividade">
+
+                    <!-- TIPO DE ATIVIDADE -->
+                    <div class="mb-3">
+                        <label for="tipo" class="form-label">
+                            Tipo de atividade
+                        </label>
+
+                        <select
+                            id="tipo"
+                            class="form-select"
+                            required>
+
+                            <option value="">Selecione o tipo</option>
+                            <option value="curso">Curso</option>
+                            <option value="workshop">Workshop</option>
+
+                        </select>
+                    </div>
+
+                    <!-- DADOS COMUNS -->
+                    <div class="row">
+
+                        <div class="col-md-8 mb-3">
+                            <label for="titulo" class="form-label">
+                                Título
+                            </label>
+
+                            <input
+                                type="text"
+                                id="titulo"
+                                class="form-control"
+                                placeholder="Digite o título da atividade"
+                                required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="ano" class="form-label">
+                                Ano
+                            </label>
+
+                            <input
+                                type="number"
+                                id="ano"
+                                class="form-control"
+                                placeholder="Ex.: 2026"
+                                min="0"
+                                required>
+                        </div>
+
+                    </div>
+
+                    <!-- CAMPOS ESPECÍFICOS DO CURSO -->
+                    <div id="camposCurso" class="d-none">
+
+                        <h5 class="mt-3 mb-3">Dados do curso</h5>
+
+                        <div class="mb-3">
+                            <label for="professor" class="form-label">
+                                Professor
+                            </label>
+
+                            <input
+                                type="text"
+                                id="professor"
+                                class="form-control"
+                                placeholder="Nome do professor">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="cargaHoraria" class="form-label">
+                                    Carga horária
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="cargaHoraria"
+                                    class="form-control"
+                                    placeholder="Horas"
+                                    min="1">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="vagas" class="form-label">
+                                    Número de vagas
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="vagas"
+                                    class="form-control"
+                                    placeholder="Quantidade"
+                                    min="1">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CAMPOS ESPECÍFICOS DO WORKSHOP -->
+                    <div id="camposWorkshop" class="d-none">
+
+                        <h5 class="mt-3 mb-3">Dados do workshop</h5>
+
+                        <div class="mb-3">
+                            <label for="instrutor" class="form-label">
+                                Instrutor
+                            </label>
+
+                            <input
+                                type="text"
+                                id="instrutor"
+                                class="form-control"
+                                placeholder="Nome do instrutor">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="local" class="form-label">
+                                    Local
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="local"
+                                    class="form-control"
+                                    placeholder="Local do workshop">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="duracaoHoras" class="form-label">
+                                    Duração em horas
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="duracaoHoras"
+                                    class="form-control"
+                                    placeholder="Horas"
+                                    min="1">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BOTÕES -->
+                    <div class="d-flex flex-wrap gap-2 mt-4">
+
+                        <button
+                            type="submit"
+                            id="botaoSalvar"
+                            class="btn btn-primary">
+                            Salvar atividade
+                        </button>
+
+                        <button
+                            type="button"
+                            id="botaoCancelar"
+                            class="btn btn-outline-secondary d-none">
+                            Cancelar edição
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="py-4 text-center">
+        <div class="container">
+            <p class="mb-0">
+                Projeto prático — Desenvolvimento Web e Mobile I
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap local -->
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript do projeto -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
